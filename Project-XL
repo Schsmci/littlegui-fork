@@ -37,6 +37,8 @@ repeat wait() until game:IsLoaded() wait()
 game:GetService("Players").LocalPlayer.Idled:connect(function()
 game:GetService("VirtualUser"):ClickButton2(Vector2.new())
 end)
+
+
 local OldNameCall
 OldNameCall = hookmetamethod(game, "__newindex", function(A, B, C)
     if (not checkcaller() and A.ClassName == "Humanoid" and (B == "WalkSpeed" or B == "JumpPower")) then
@@ -102,6 +104,42 @@ function c()
         end
     end
 end
+
+
+local Equiped = Instance.new("BoolValue")
+Equiped.Parent = game.Players.LocalPlayer.Character
+Equiped.Name = "Tool"
+game.Players.LocalPlayer.CharacterAdded:Connect(
+    function()
+        wait(2)
+        local Equiped = Instance.new("BoolValue")
+        Equiped.Parent = game.Players.LocalPlayer.Character
+        Equiped.Name = "Tool"
+    end
+)
+local Equiped = function(A)
+    if A:IsA("Tool") then
+        game.Players.LocalPlayer.Character.Tool.Value = true
+        wait(1)
+        game.Players.LocalPlayer.Character.Animate.Disabled = true
+        game.Players.LocalPlayer.Character.Animate.Disabled = false
+    end
+end
+
+game.Players.LocalPlayer.Character.ChildAdded:Connect(
+    function(v)
+        if v:IsA("Tool") then
+            Equiped(v)
+        end
+    end
+)
+game.Players.LocalPlayer.Character.ChildRemoved:Connect(
+    function(v)
+        if v:IsA("Tool") then
+            game.Players.LocalPlayer.Character.Tool.Value = false
+        end
+    end
+)
 
 code = {}
 for i, v in pairs(game:GetService("Players").LocalPlayer.Codes:GetDescendants()) do
@@ -2099,6 +2137,9 @@ local Slider4 = Section4:CreateSlider("Tile Scale",0,1,nil,false, function(Value
 	Window:SetTileScale(Value)
 end)
 Slider4:SetValue(0.5)
+
+
+
 game.StarterGui:SetCore("SendNotification", {
 Title = "Warning";
 Text = "RightControl to toggle";
