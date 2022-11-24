@@ -3,7 +3,7 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
 game:GetService("VirtualUser"):ClickButton2(Vector2.new())
 end)
 
-if game.PlaceId == 648362523 then
+if game.PlaceId == 6648893133 then
     repeat wait() until game:IsLoaded()
     game.StarterGui:SetCore(
         "SendNotification",
@@ -45,5 +45,5 @@ if game.PlaceId == 648362523 then
         end
     end
 else
-    game:GetService("TeleportService"):Teleport(648362523, LocalPlayer)
+    game:GetService("TeleportService"):Teleport(6648893133, LocalPlayer)
 end
